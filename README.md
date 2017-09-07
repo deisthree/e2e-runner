@@ -1,16 +1,16 @@
 
 ## Overview of use
 
-E2e-runner coordinates the entire e2e run against a Workflow [chart](https://github.com/deis/charts/tree/master/workflow-dev), including:
+E2e-runner coordinates the entire e2e run against a Workflow [chart](https://github.com/deisthree/charts/tree/master/workflow-dev), including:
 
-  1. Coordinating the leasing of a GKE k8s cluster via [k8s-claimer](https://github.com/deis/k8s-claimer),
+  1. Coordinating the leasing of a GKE k8s cluster via [k8s-claimer](https://github.com/deisthree/k8s-claimer),
   1. Cleaning up the leased cluster if need be (primarily deleting the `deis` namespace if still exists),
   1. Setting up the local [helm](https://github.com/kubernetes/helm) install on the leased cluster (deleting the `tiller` deployment if necessary),
-  1. Installing the Workflow and [Workflow-e2e](https://github.com/deis/charts/tree/master/workflow-dev-e2e) charts (setting particular values if necessary),
+  1. Installing the Workflow and [Workflow-e2e](https://github.com/deisthree/charts/tree/master/workflow-dev-e2e) charts (setting particular values if necessary),
   1. Monitoring to see when these charts are up and running,
   1. Following and capturing chart logs and placing them where Jenkins/others can find them before deleting the cluster lease and exiting.
 
-See the main [run](https://github.com/deis/e2e-runner/blob/master/scripts/run.sh) script for the basic outline of actions presented above.  It is a good entry point into the finer details of e2e-runner functionality.
+See the main [run](https://github.com/deisthree/e2e-runner/blob/master/scripts/run.sh) script for the basic outline of actions presented above.  It is a good entry point into the finer details of e2e-runner functionality.
 
 ## Running the tests on CI
 To run the tests for a jenkins job you should have a `docker run` command that looks like the following:
@@ -32,6 +32,6 @@ $ docker run -e AUTH_TOKEN=$AUTH_TOKEN quay.io/deisci/e2e-runner
 ```
 
 ## Environment Variables
-* `AUTH_TOKEN` - Token needed to talk to [k8s claimer](https://github.com/deis/k8s-claimer)
+* `AUTH_TOKEN` - Token needed to talk to [k8s claimer](https://github.com/deisthree/k8s-claimer)
 * `CLUSTER_DURATION` - How long to lease the k8s cluster (default: `800 seconds`)
 * `GINKGO_NODES` - How many nodes to use when running e2e tests in parallel (default: `30`)
